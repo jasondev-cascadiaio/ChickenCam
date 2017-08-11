@@ -8,7 +8,7 @@
     Python Version: 3.0
 """
 
-
+import time
 from Camera.Camera import Camera
 
 
@@ -26,7 +26,9 @@ if enable_camera:
     camera = Camera()
 
     if debug: print("Camera object created. Taking picture")
-    photo_location = camera.take_picture()
+    timestamp = time.strftime("%Y%m%d-%H%M%S")
+    photo_file_name = '/home/pi/python/ChickenCam/photos/%s.jpg' % timestamp
+    photo_location = camera.take_picture(photo_file_name)
 
     # If FTP functionality is enabled
     if ftp_photos:

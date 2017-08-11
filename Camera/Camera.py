@@ -18,26 +18,23 @@ class Camera:
     def __init__(self, debug=False):
         self.debug = debug
 
-    def take_picture(self):
+    def take_picture(self, photo_name):
         with picamera.PiCamera() as camera:
-            # Create timestamp string for filename
-            timestamp = time.strftime("%Y%m%d-%H%M%S")
-            photo_file_name = '/home/pi/python/chickencam/photos/%s.jpg' % timestamp
-
             # Take photo and save to disck
             if self.debug: print("Camera.Camera: Taking Photo")
             camera.start_preview()
             time.sleep(2)
             camera.resolution = (3280, 2464)
             camera.exposure_mode = 'auto'
-            camera.capture(photo_file_name)
+            camera.capture(photo_name)
             if self.debug: print("Photo saved to disc")
 
             # Rotate photo to compensate for rotational position in case
-            flip_vert = Image.open(photo_file_name).transpose(Image.FLIP_TOP_BOTTOM)
-            flip_vert.save(photo_file_name, quality=100)
-            flip_horiz = Image.open(photo_file_name).transpose(Image.FLIP_LEFT_RIGHT)
-            flip_horiz.save(photo_file_name, quality=100)
+            flip_vert = Image.open(photo_name).transpose(Image.FLIP_TOP_BOTTOM)
+            flip_vert.save(photo_name, quality=100)
+            flip_horiz = Image.open(photo_name).transpose(Image.FLIP_LEFT_RIGHT)
+            flip_horiz.save(photo_name, quality=100)
             if self.debug: print("Photo rotated successfully")
 
-        return photo_file_name
+            return True
+
