@@ -10,8 +10,9 @@
 """
 
 import time             # Used to generate timestamp filename
-from PIL import Image   # Used to modify the image (rotate)
 import picamera         # Used to control the camera module
+
+# from PIL import Image   # Used to modify the image (rotate)
 
 
 class Camera:
@@ -20,21 +21,18 @@ class Camera:
 
     def take_picture(self, photo_name):
         with picamera.PiCamera() as camera:
-            # Take photo and save to disck
-            if self.debug: print("Camera.Camera: Taking Photo")
+            # Take photo and save to disc
             camera.start_preview()
             time.sleep(2)
-            camera.resolution = (3280, 2464)
+            camera.resolution = (1024, 768)
             camera.exposure_mode = 'auto'
             camera.capture(photo_name)
-            if self.debug: print("Photo saved to disc")
 
             # Rotate photo to compensate for rotational position in case
             # flip_vert = Image.open(photo_name).transpose(Image.FLIP_TOP_BOTTOM)
             # flip_vert.save(photo_name, quality=100)
             # flip_horiz = Image.open(photo_name).transpose(Image.FLIP_LEFT_RIGHT)
             # flip_horiz.save(photo_name, quality=100)
-            if self.debug: print("Photo rotated successfully")
 
             return True
 
