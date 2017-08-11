@@ -30,10 +30,10 @@ class Camera:
             if self.debug: print("Photo saved to disc")
 
             # Rotate photo to compensate for rotational position in case
-            flip_vert = Image.open(photo_name).transpose(Image.FLIP_TOP_BOTTOM)
-            flip_vert.save(photo_name, quality=100)
-            flip_horiz = Image.open(photo_name).transpose(Image.FLIP_LEFT_RIGHT)
-            flip_horiz.save(photo_name, quality=100)
+            # flip_vert = Image.open(photo_name).transpose(Image.FLIP_TOP_BOTTOM)
+            # flip_vert.save(photo_name, quality=100)
+            # flip_horiz = Image.open(photo_name).transpose(Image.FLIP_LEFT_RIGHT)
+            # flip_horiz.save(photo_name, quality=100)
             if self.debug: print("Photo rotated successfully")
 
             return True
